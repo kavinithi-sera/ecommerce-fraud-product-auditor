@@ -1,0 +1,18 @@
+# Environment variables & API keys
+.env
+*.env
+
+# SQLite Database
+database.db
+*.db
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# OS & Node / Next.js build artifacts
+.DS_Store
+.vscode/
+node_modules/
+.next/
+out/
