@@ -41,12 +41,12 @@ def detect_duplicate_reviews(reviews, similarity_threshold=0.85):
 #Gemini API Integration for Sentiment & Sarcasm
 def analyze_reviews_with_gemini(reviews_text):
     """
-    Uses Gemini API (JSON mode) to evaluate Hinglish slang, sarcasm, and sentiment anomalies.
+    Uses Gemini API (JSON mode) to evaluate regional slang, sarcasm, and sentiment anomalies.
     """
     client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
     prompt = f"""
-    Analyze these e-commerce product reviews for fake sentiment, regional slang/Hinglish, sarcasm, or rating mismatches.
+    Analyze these e-commerce product reviews for fake sentiment, regional slang/multilingual content, sarcasm, or rating mismatches.
     Reviews:
     {reviews_text}
 
@@ -60,14 +60,14 @@ def analyze_reviews_with_gemini(reviews_text):
             "type": "OBJECT",
             "properties": {
                 "sarcasm_detected": {"type": "BOOLEAN"},
-                "hinglish_sentiment_score": {"type": "NUMBER"}, # -1.0 to 1.0
+                "regional_slang_score": {"type": "NUMBER"}, # -1.0 to 1.0
                 "suspicious_review_reasons": {
                     "type": "ARRAY",
                     "items": {"type": "STRING"}
                 },
                 "confidence_score": {"type": "NUMBER"}
             },
-            "required": ["sarcasm_detected", "hinglish_sentiment_score", "suspicious_review_reasons"]
+            "required": ["sarcasm_detected", "regional_slang_score", "suspicious_review_reasons"]
         }
     )
 
@@ -93,7 +93,7 @@ def run_nlp_pipeline(reviews_list):
         print(f"[Warning] Gemini API unavailable or rate-limited: {e}")
         ai_metrics = {
             "sarcasm_detected": False,
-            "hinglish_sentiment_score": 0.0,
+            "regional_slang_score": 0.0,
             "suspicious_review_reasons": ["AI analysis bypassed (Fallback Mode Active)"],
             "confidence_score": 0.5
         }
