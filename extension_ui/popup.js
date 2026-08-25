@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const riskBadge = document.getElementById('risk-badge');
   const riskScore = document.getElementById('risk-score');
   const reasonsList = document.getElementById('reasons-list');
-  const finalScore = Math.max(5, mockApiResponse.risk_score);
 
   // Simulated payload received from Flask API (Role 1 & Role 2 & Role 3 merged output)
   const mockApiResponse = {
