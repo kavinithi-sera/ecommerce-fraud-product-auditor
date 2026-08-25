@@ -104,3 +104,18 @@ def run_nlp_pipeline(reviews_list):
         "ai_metrics": ai_metrics,
         "fallback_active": used_fallback
     }
+
+def calculate_risk_score(local_metrics, ai_metrics):
+    raw_score = 0
+    
+    # Add points based on detected anomalies...
+    if local_metrics.get("duplicate_count", 0) > 0:
+        raw_score += 30
+        
+    if ai_metrics.get("sarcasm_detected"):
+        raw_score += 25
+
+    # Enforce a minimum score of 5 when no risk factors are triggered
+    final_score = max(5, raw_score)
+    
+    return final_score
