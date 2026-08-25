@@ -81,6 +81,23 @@ def analyze_reviews_with_gemini(reviews_text):
 
 #Fallback Logic
 def run_nlp_pipeline(reviews_list):
+    # Guard clause: Handle empty review lists gracefully
+    if not reviews_list or len(reviews_list) == 0:
+        return {
+            "local_fraud_metrics": {
+                "duplicate_count": 0,
+                "flagged_pairs": []
+            },
+            "ai_metrics": {
+                "sarcasm_detected": False,
+                "hinglish_sentiment_score": 0.0,
+                "suspicious_review_reasons": ["No customer reviews found for this listing."],
+                "confidence_score": 1.0
+            },
+            "fallback_active": False,
+            "overall_risk_score": 5  # Returns your baseline score of 5
+        }
+    
     # 1. Always run local TF-IDF check
     local_metrics = detect_duplicate_reviews(reviews_list)
     
