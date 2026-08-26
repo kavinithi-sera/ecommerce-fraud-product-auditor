@@ -52,7 +52,7 @@ init_local_db()
 def home():
     return jsonify({
         "status": "online",
-        "message": "E-Commerce Fraud Audit API is running live!"
+        "message": "Scamouflage is running live!"
     }), 200
 
 @app.route('/api/analyze', methods=['POST'])
