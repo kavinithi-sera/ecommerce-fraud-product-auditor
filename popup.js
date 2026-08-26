@@ -1,5 +1,5 @@
-const BACKEND_URL = "http://127.0.0.1:5001/api/analyze";
-const FEEDBACK_URL = "http://127.0.0.1:5001/api/feedback";
+const BACKEND_URL = "https://ecommerce-fraud-detection-ext.onrender.com";
+const FEEDBACK_URL = "https://ecommerce-fraud-detection-ext.onrender.com";
 
 let lastResult = null;
 let selectedVote = null;
