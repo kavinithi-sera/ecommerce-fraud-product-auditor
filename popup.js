@@ -1,5 +1,5 @@
-const BACKEND_URL = "https://ecommerce-fraud-detection-ext.onrender.com";
-const FEEDBACK_URL = "https://ecommerce-fraud-detection-ext.onrender.com";
+const BACKEND_URL = "https://ecommerce-fraud-detection-ext.onrender.com/api/analyze";
+const FEEDBACK_URL = "https://ecommerce-fraud-detection-ext.onrender.com/api/feedback";
 
 let lastResult = null;
 let selectedVote = null;
