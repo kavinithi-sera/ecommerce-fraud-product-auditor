@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+<div id="main-view" class="view">
+  <div class="header">
+    <div>
+      <h1>SHOPPING FRAUD AUDITOR</h1>
+      <p class="domain" id="domain-text">—</p>
+    </div>
+    <span class="badge" id="verify-badge">UNVERIFIED</span>
+  </div>
+
+  <div class="gauge-wrap">
+    <svg width="160" height="160" viewBox="0 0 160 160">
+      <circle cx="80" cy="80" r="70" class="gauge-bg"/>
+      <circle cx="80" cy="80" r="70" class="gauge-fg" id="gauge-fg"/>
+    </svg>
+    <div class="gauge-center">
+      <div class="score" id="score-num">0</div>
+      <div class="score-max">OF 100</div>
+    </div>
+  </div>
+  <div class="risk-label" id="risk-label">—</div>
+
+  <div class="section-label">Triggered risk reasons</div>
+  <ul class="reasons-preview" id="reasons-preview"></ul>
+
+  <div class="btn-row">
+    <button class="btn-outline" id="view-report-btn">VIEW DETAILED REASONS</button>
+    <button class="btn-outline" id="download-btn">DOWNLOAD REPORT</button>
+  </div>
+
+  <div class="footer-row">
+    <span>V1.0.4 SECURE EXTENSION</span>
+    <a href="#" id="open-feedback-link">Rate this scan</a>
+  </div>
+</div>
+
+<div id="report-view" class="view hidden">
+  <div class="report-header">
+    <span>🛡 SHOPPING FRAUD AUDIT REPORT</span>
+    <span class="close-x" id="close-report">×</span>
+  </div>
+
+  <div class="report-body">
+    <div class="meta-label">TARGET URL</div>
+    <div class="meta-value" id="report-domain">—</div>
+
+    <div class="meta-label">AUDIT TIMESTAMP</div>
+    <div class="meta-value" id="report-timestamp">—</div>
+
+    <div class="verdict-box">
+      <div class="meta-label">FINAL VERDICT</div>
+      <div class="verdict-text" id="report-verdict">—</div>
+    </div>
+
+    <div class="section-label">Scores by risk vector</div>
+    <div id="vector-bars"></div>
+
+    <div class="note-box">
+      📊 Score is based on the analysis vectors currently implemented in this build (price variance, domain infrastructure, review authenticity, dark patterns). 
+    </div>
+
+    <div class="footer-row">
+      <span>V1.0.4 SECURE EXTENSION</span>
+      <span>Generated client-side</span>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-outline" id="export-json-btn">EXPORT JSON</button>
+      <button class="btn-solid" id="report-domain-btn">REPORT DOMAIN</button>
+    </div>
+  </div>
+</div>
+
+<div id="feedback-view" class="view hidden">
+  <div class="report-header">
+    <span>Was this assessment accurate?</span>
+    <span class="close-x" id="close-feedback">×</span>
+  </div>
+  <div class="report-body">
+    <p class="subtle">Your input helps calibrate the fraud detection engine.</p>
+
+    <div class="section-label">Select outcome</div>
+    <div class="btn-row">
+      <button class="vote-btn" id="vote-accurate" data-vote="Accurate">✓ ACCURATE</button>
+      <button class="vote-btn" id="vote-false" data-vote="False Positive">! FALSE POSITIVE</button>
+    </div>
+
+    <div class="section-label">Observations</div>
+    <textarea id="feedback-notes" placeholder="Tell us what you noticed..."></textarea>
+
+    <button class="btn-solid full-width" id="send-feedback-btn">SEND FEEDBACK</button>
+    <p class="subtle small">Feedback is stored anonymously and helps improve future scans.</p>
+  </div>
+</div>
+
+<div id="loading-state" class="view">
+  <div class="spinner"></div>
+  <p class="subtle">Analyzing price anomalies &amp; reviews...</p>
+</div>
+
+<script src="jspdf.umd.min.js"></script>
+<script src="popup.js"></script>
+
+</body>
+</html>
