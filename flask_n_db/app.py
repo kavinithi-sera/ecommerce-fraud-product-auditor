@@ -48,6 +48,13 @@ def init_local_db():
 
 init_local_db()
 
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({
+        "status": "online",
+        "message": "Scamouflage is running live!"
+    }), 200
+
 @app.route('/api/analyze', methods=['POST'])
 def analyze_listing():
     """

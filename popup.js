@@ -1,5 +1,5 @@
-const BACKEND_URL = "http://127.0.0.1:5001/api/analyze";
-const FEEDBACK_URL = "http://127.0.0.1:5001/api/feedback";
+const BACKEND_URL = "https://ecommerce-fraud-detection-ext.onrender.com/api/analyze";
+const FEEDBACK_URL = "https://ecommerce-fraud-detection-ext.onrender.com/api/feedback";
 
 let lastResult = null;
 let selectedVote = null;
@@ -53,7 +53,7 @@ function vectorRow(label, value) {
   const wrap = document.createElement("div");
   wrap.className = "vector-row";
   if (value === null || value === undefined) {
-    wrap.innerHTML = `<div class="vector-top"><span>${label}</span><span class="vector-na">Not yet implemented</span></div>`;
+    wrap.innerHTML = `<div class="vector-top"><span>${label}</span><span class="vector-na">Coming soon</span></div>`;
     return wrap;
   }
   const pct = Math.min((value / 20) * 100, 100);
@@ -77,7 +77,7 @@ function renderReport(data) {
   bars.appendChild(vectorRow("Domain infrastructure", vs.domain_infrastructure));
   bars.appendChild(vectorRow("Review authenticity", vs.review_authenticity));
   bars.appendChild(vectorRow("Dark patterns", vs.dark_patterns));
-  bars.appendChild(vectorRow("Platform verification", vs.platform_verification));
+  
 }
 
 function showError(message) {
@@ -133,7 +133,7 @@ const VECTOR_EXPLANATIONS = {
   domain_infrastructure: "Checks how recently the domain was registered and whether it uses a high-risk extension (like .xyz or .top) — newer, throwaway-style domains score higher risk.",
   review_authenticity: "Runs review text through local duplicate detection (TF-IDF + cosine similarity) and Gemini AI sentiment analysis to catch copy-pasted or sarcastic/mismatched reviews.",
   dark_patterns: "Scans page text for manipulative tactics — fake urgency countdowns, artificial stock counters, and non-refundable Cash-on-Delivery restrictions.",
-  platform_verification: "Not yet implemented in this build. Planned to check for marketplace trust badges such as Flipkart Assured or Amazon Prime.",
+  platform_verification: "Platform verification is on our roadmap — we're building automated checks for marketplace trust badges like Flipkart Assured and Amazon Prime to add an extra layer of confidence in an upcoming release.",
 };
 
 const VECTOR_LABELS = {
@@ -180,7 +180,7 @@ function generatePDFReport() {
   const vs = lastResult.vector_scores || {};
   Object.keys(VECTOR_LABELS).forEach((key) => {
     const val = vs[key];
-    const scoreText = val === null || val === undefined ? "Not yet implemented" : `${val} / 20`;
+    const scoreText = val === null || val === undefined ? "Coming soon" : `${val} / 20`;
     doc.setFont(undefined, "bold");
     doc.text(`${VECTOR_LABELS[key]}: `, marginX, y);
     doc.setFont(undefined, "normal");
