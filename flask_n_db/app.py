@@ -12,7 +12,11 @@ if PROJECT_ROOT not in sys.path:
 from dotenv import load_dotenv
 load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
-from security_engine.sec_engine import run_role2_security_audit, hash_ip_address, init_db
+from security_engine.sec_engine import (
+    run_role2_security_audit, hash_ip_address, init_db,
+    check_domain_infrastructure, analyze_internal_price_anomaly,
+    check_external_market_price, analyze_dark_patterns
+)
 from ml_nlp_engine.nlp_engine import run_nlp_pipeline
 
 app = Flask(__name__)
@@ -99,6 +103,20 @@ def analyze_listing():
             for reason in ai_data.get('suspicious_review_reasons', []):
                 if "Fallback" not in reason and reason not in all_reasons:
                     all_reasons.append(f"Review Flag: {reason}")
+        
+        # Vector-level breakdown for the detailed report UI
+        domain_vec = check_domain_infrastructure(domain)
+        internal_price_vec = analyze_internal_price_anomaly(page_text)
+        external_price_vec = check_external_market_price(title, price)
+        dark_vec = analyze_dark_patterns(page_text)
+
+        vector_scores = {
+            "price_variance": round(min(internal_price_vec['risk'] + external_price_vec['risk'], 45) / 45 * 20),
+            "domain_infrastructure": round(min(domain_vec['risk'], 35) / 35 * 20),
+            "review_authenticity": round(min(nlp_score, 20)) if reviews else None,
+            "dark_patterns": round(min(dark_vec['risk'], 15) / 15 * 20),
+            "platform_verification": None  # not implemented yet
+        }
 
         # 4. Calculate Aggregate Score (Capped at 100)
         final_risk_score = min(security_score + nlp_score, 100)
@@ -133,7 +151,9 @@ def analyze_listing():
             "breakdown": {
                 "security_score": security_score,
                 "nlp_score": nlp_score
-            }
+            },
+            "vector_scores": vector_scores
+       
         })
 
     except Exception as e:
