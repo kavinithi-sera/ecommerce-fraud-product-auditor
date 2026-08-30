@@ -6,3 +6,5 @@ flask-cors
 python-dotenv
 python-whois
 ddgs
+duckduckgo_search
+gunicorn

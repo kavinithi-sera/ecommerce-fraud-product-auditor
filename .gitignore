@@ -5,14 +5,32 @@
 # SQLite Database
 database.db
 *.db
+*.sqlite3
 
-# Python bytecode
+# Python bytecode & cache
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+.pytest_cache/
 
-# OS & Node / Next.js build artifacts
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python packaging & egg info
+*.egg-info/
+dist/
+build/
+
+# OS & Editor artifacts
 .DS_Store
+Thumbs.db
 .vscode/
+.idea/
+
+# Node / Build artifacts
 node_modules/
 .next/
 out/
