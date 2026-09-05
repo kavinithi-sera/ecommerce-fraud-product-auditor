@@ -1,7 +1,6 @@
-# Shopping Fraud Auditor
+# E-Commerce Deceptive Product Auditor - Web Extension
 
-A Chrome extension with a Python Flask backend that evaluates online shopping
-listings in real time and flags signs of fraud before a purchase is made.
+Real-time client-side browser extension and Python Flask backend that audits e-commerce storefronts for malicious domain infrastructure, dark patterns, pricing anomalies, and fake review spam.
 
 ## Project Structure
 - `extension/` – Chrome extension (Manifest V3): content script, popup UI
