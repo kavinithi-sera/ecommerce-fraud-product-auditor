@@ -1,4 +1,4 @@
-# E-Commerce Deceptive Product Auditor - Web Extension
+# E-Commerce Deceptive Product Auditor
 
 Real-time client-side browser extension and Python Flask backend that audits e-commerce storefronts for malicious domain infrastructure, dark patterns, pricing anomalies, and fake review spam.
 
