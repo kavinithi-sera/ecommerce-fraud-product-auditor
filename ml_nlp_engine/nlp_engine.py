@@ -186,7 +186,7 @@ def analyze_page_semantics_with_gemini(title, page_text, reviews_text):
 
     try:
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-flash-latest",
             contents=prompt,
             config=config
         )
