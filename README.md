@@ -2,6 +2,8 @@
 
 Real-time client-side browser extension and Python Flask backend that audits e-commerce storefronts for malicious domain infrastructure, dark patterns, pricing anomalies, and fake review spam.
 
+Demo Video Link: https://www.loom.com/share/755bc851be424a78b739d568b93b1d15
+
 ## Project Structure
 - `extension/` – Chrome extension (Manifest V3): content script, popup UI
 - `flask_n_db/` – Flask backend, SQLite database, main API entry point
